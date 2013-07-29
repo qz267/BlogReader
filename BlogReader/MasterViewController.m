@@ -25,6 +25,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.titlesArray = [NSArray arrayWithObjects:@"Getting Started with WordPress",
+                        @"Second Title",
+                        @"Third Title"
+                        ,nil];
 	// Do any additional setup after loading the view, typically from a nib.
 //    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 //
@@ -57,15 +61,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return self.titlesArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    NSString *object = self.titlesArray[indexPath.row];
+    cell.textLabel.text = object;
     return cell;
 }
 
@@ -104,9 +108,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        NSDate *object = _objects[indexPath.row];
-//        [[segue destinationViewController] setDetailItem:object];
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSString *object = self.titlesArray[indexPath.row];
+        [[segue destinationViewController] setDetailItem:object];
     }
 }
 
